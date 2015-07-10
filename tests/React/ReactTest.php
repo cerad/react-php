@@ -3,10 +3,6 @@ namespace Cerad\Component\Test\React;
 
 class ReactTest extends \PHPUnit_Framework_TestCase
 {
-  protected function createStream()
-  {
-    return new Stream('php://memory','wb+');
-  }
   public function testTitleComponent()
   {
     $titleComponent = new TitleComponent(['title' => 'Buffy & Spike']);
@@ -87,5 +83,28 @@ TYPEOTHER;
     $expect = str_replace(["\n"],PHP_EOL,$expect);
     $html   = str_replace(["\n"],PHP_EOL,$teamTableComponent->render());
     $this->assertEquals($expect,$html);
+  }
+  public function testLoginFormComponent()
+  {
+    $loginFormComponent = new LoginFormComponent([
+      'action'        => '/login',
+      'last_username' => 'lloyd',
+    ]);
+
+    $expect = <<<TYPEOTHER
+<form action="/login" method="post">
+  <label for="username">Username:</label>
+  <input type="text" id="username" name="_username" value="lloyd" />
+  <label for="password">Password:</label>
+  <input type="password" id="password" name="_password" />
+  <button type="submit">Login</button>
+</form>
+TYPEOTHER;
+
+    $this->assertEquals($expect,$loginFormComponent->render());
+  }
+  public function testSubmitButton()
+  {
+
   }
 }
