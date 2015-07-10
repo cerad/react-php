@@ -1,0 +1,7 @@
+/vendor/
+/bin/
+/.idea/
+/nbproject/
+/composer.lock
+/node_modules/
+/phpunit.xml
