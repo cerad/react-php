@@ -7,9 +7,9 @@ abstract class AbstractComponent
 
   public function __construct(array $props = [])
   {
-    $this->props  = array_replace($this->props,$props);
+    $this->replaceProps($props);
   }
-  public function replaceProps(array $props = [])
+  public function replaceProps(array $props)
   {
     $this->props = array_replace($this->props,$props);
   }

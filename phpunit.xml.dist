@@ -8,7 +8,7 @@
          bootstrap="vendor/autoload.php"
 >
   <testsuites>
-    <testsuite name="Middleware Test Suit">
+    <testsuite name="React Test Suite">
       <directory>./tests/</directory>
     </testsuite>
   </testsuites>
