@@ -31,18 +31,20 @@ abstract class AbstractView
   }
   abstract public function render();
 
-  protected function renderAttrs(array $keys)
+  protected function renderAttrs(array $attrKeys = null)
   {
+    $attrKeys = $attrKeys ? $attrKeys : $this->attrKeys;
+
     $props = $this->props;
     $html  = null;
-    foreach($keys as $key)
+    foreach($attrKeys as $attrKey)
     {
-      $value = isset($props[$key]) ? $props[$key] : null;
+      $value = isset($props[$attrKey]) ? $props[$attrKey] : null;
       if ($value !== null && $value !== false) {
         $html .=
           $value === true ?
-            ' ' . $key :
-            sprintf(' %s="%s"',$key,$this->escape($value));
+            ' ' . $attrKey :
+            sprintf(' %s="%s"',$attrKey,$this->escape($value));
       }
     }
     return $html;
@@ -55,9 +57,16 @@ abstract class AbstractView
 
     foreach($this->props['children'] as $child)
     {
-      $html .= is_object($child) ?
-        $child->render()      . "\n":
-        $this->escape($child) . "\n";
+      if (is_array($child)) {
+        $html .= $this->renderChildren($child);
+      }
+      if (is_object($child)) {
+        $html .= $child->render();
+      }
+      if (is_string($child)) {
+        $html .= $this->escape($child);
+      }
+      $html .= "\n";
     }
     return $html;
   }

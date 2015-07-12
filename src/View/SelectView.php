@@ -3,6 +3,8 @@ namespace Cerad\Component\View;
 
 class SelectView extends AbstractView
 {
+  protected $tag = 'select';
+
   public function __construct($props = [])
   {
     // http://www.w3schools.com/tags/tag_select.asp
@@ -13,7 +15,7 @@ class SelectView extends AbstractView
     ]);
     $props = array_replace([
       'value'   => null,
-      'options' => [],
+      'choices' => [],
     ],$props);
     parent::__construct($props);
   }
@@ -30,7 +32,7 @@ class SelectView extends AbstractView
 <label for="{$id}">{$label}</label>
 TYPEOTHER;
   }
-  protected function renderOptions()
+  protected function renderChoices()
   {
     $props = $this->props;
 
@@ -38,7 +40,7 @@ TYPEOTHER;
 
     $html = null;
     $optionView = new OptionView();
-    foreach($props['options'] as $key => $value) {
+    foreach($props['choices'] as $key => $value) {
       $selected = false;
       foreach($values as $valueKey) {
         if ($key == $valueKey) {
@@ -56,15 +58,11 @@ TYPEOTHER;
   }
   public function render()
   {
-    $attrsHtml = $this->renderAttrs($this->attrKeys);
-
-    $labelHtml = $this->renderLabel();
-    if ($labelHtml) $labelHtml .= "\n";
-
     return <<<TYPEOTHER
-{$labelHtml}<select{$attrsHtml}>
-{$this->renderOptions()}
-</select>
+{$this->renderLabel()}
+<$this->tag{$this->renderAttrs()}>
+{$this->renderChoices()}
+</$this->tag>
 TYPEOTHER;
 
   }

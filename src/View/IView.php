@@ -11,7 +11,7 @@ class IView extends AbstractView
     $this->attrKeys = array_merge($this->attrKeys,[
     ]);
     $props = array_replace([
-      'content' => null,
+
     ],$props);
     parent::__construct($props);
   }

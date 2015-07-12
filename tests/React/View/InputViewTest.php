@@ -3,15 +3,10 @@ namespace Cerad\Component\Test\React\View;
 
 use Cerad\Component\View\InputView;
 use Cerad\Component\View\SelectView;
+use Cerad\Component\Test\React\AbstractTst;
 
-class InputViewTest extends \PHPUnit_Framework_TestCase
+class InputViewTest extends AbstractTst
 {
-  protected function assertEqualsEol($str1,$str2)
-  {
-    $str1 = str_replace(["\r","\n"],'',$str1);
-    $str2 = str_replace(["\r","\n"],'',$str2);
-    $this->assertEquals($str1,$str2);
-  }
   public function testTextInputView()
   {
     $view = new InputView([
@@ -61,7 +56,7 @@ TYPEOTHER;
   {
     $view = new SelectView([
       'value' => 42,
-      'options' => [
+      'choices' => [
         22 => 'Question',
         42 => 'Answer',
         99 => 'Whatever',

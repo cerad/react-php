@@ -3,15 +3,12 @@ namespace Cerad\Component\Test\React\View;
 
 use Cerad\Component\View\FormView;
 use Cerad\Component\View\InputView;
+use Cerad\Component\View\ButtonView;
 
-class FormViewTest extends \PHPUnit_Framework_TestCase
+use Cerad\Component\Test\React\AbstractTst;
+
+class FormViewTest extends AbstractTst
 {
-  protected function assertEqualsEol($str1,$str2)
-  {
-    $str1 = str_replace(["\r","\n"],'',$str1);
-    $str2 = str_replace(["\r","\n"],'',$str2);
-    $this->assertEquals($str1,$str2);
-  }
   public function testFormView()
   {
     $userInputView = new InputView([
@@ -23,11 +20,19 @@ class FormViewTest extends \PHPUnit_Framework_TestCase
       'type' => 'password',
       'name' => 'userpass'
     ]);
+    $buttonView = new ButtonView([
+      'type'  => 'submit',
+      'class' => 'btn btn-success',
+      'children' => [
+        'Sign On'
+      ],
+    ]);
     $formView = new FormView([
       'action'   => '/form',
-      'elements' => [
-        $userInputView,
-        $passInputView,
+      'children' => [
+        'username' => $userInputView,
+        'userpass' => $passInputView,
+        'login'    => $buttonView,
       ],
     ]);
 
@@ -35,6 +40,7 @@ class FormViewTest extends \PHPUnit_Framework_TestCase
 <form action="/form" enctype="application/x-www-form-urlencoded" method="post">
 <input type="text" name="username" value="">
 <input type="password" name="userpass">
+<button class="btn btn-success" type="submit">Sign On</button>
 </form>
 TYPEOTHER;
 
