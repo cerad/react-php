@@ -3,6 +3,9 @@ namespace Cerad\Component\Test\React\View;
 
 use Cerad\Component\View\InputView;
 use Cerad\Component\View\SelectView;
+
+use Cerad\Component\View\RadioInputView;
+
 use Cerad\Component\Test\React\AbstractTst;
 
 class InputViewTest extends AbstractTst
@@ -21,8 +24,7 @@ TYPEOTHER;
   }
   public function testRadioInputView()
   {
-    $view = new InputView([
-      'type'    => 'radio',
+    $view = new RadioInputView([
       'name'    => 'gender',
       'id'      => 'gender-male',
       'value'   => 'male',
@@ -35,7 +37,7 @@ TYPEOTHER;
 
     $this->assertEqualsEol($expect,$view->render());
   }
-  public function testRadioInputWithLabelView()
+  public function sestRadioInputWithLabelView()
   {
     $view = new InputView([
       'type'    => 'radio',

@@ -54,8 +54,9 @@ abstract class AbstractView
     if (!isset($this->props['children'])) return null;
 
     $html = null;
-
-    foreach($this->props['children'] as $child)
+    $children = $this->props['children'];
+    $children = is_array($children) ? $children : [$children];
+    foreach($children as $child)
     {
       if (is_array($child)) {
         $html .= $this->renderChildren($child);

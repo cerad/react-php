@@ -5,10 +5,10 @@ My IDEs have markdown viewers.
 Hashes are section titles while stars are bullet points.
 
 Text surrounded by **double stars** are key points.
-It's so much that they have to meet the double star requirements.
+It's not so much that they have to meet the double star requirements.
 But rather, if they do, then they would be a good candidate for learning the rest.
 
-## Must have
+## Must Have
 
 * Enthusiasm
 * Willingness and ability to learn
@@ -16,7 +16,7 @@ But rather, if they do, then they would be a good candidate for learning the res
     * Solaris 10 environment programing
     * Web development
     * Testing and documentation
-* stackoverflow.com profile - demonstrates competence in both asking and answering questions
+* [Stack Overflow](stackoverflow.com) profile - demonstrates competence in both asking and answering questions
 * Can interact with customers - communication
 
 ## Technologies
