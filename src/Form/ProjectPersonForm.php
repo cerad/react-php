@@ -1,16 +1,24 @@
 <?php
 namespace Cerad\Component\Form;
 
+use Cerad\Component\View\FormView;
+use Cerad\Component\View\TextInputView;
 use Cerad\Component\View\SelectView;
 use Cerad\Component\View\RadioChoiceView;
+use Cerad\Component\View\CheckBoxChoiceView;
 
-class ProjectPersonForm
+class ProjectPersonForm extends AbstractForm
 {
-  protected $state = [
-  ];
+  protected $projectPerson;
 
+  public function setData($projectPerson)
+  {
+    $this->projectPerson = $projectPerson;
+  }
   public function render()
   {
+    $projectPerson = $this->projectPerson;
+
     $refereeLevel = new SelectView([
       'id'    => 'referee_level',
       'name'  => 'referee_level',
@@ -44,33 +52,62 @@ class ProjectPersonForm
       'label' => 'Assessment Request',
       'id'    => 'assessment_request',
       'name'  => 'assessment_request',
-      'value' => 'none',
+      'value' => $projectPerson['assessment_request'],
       'choices' => [
         'none'     => 'None',
         'informal' => 'Informal',
         'formal'   => 'Formal',
       ],
     ]);
+    $lodgingNights = new CheckBoxChoiceView([
+      'id'     => 'lodging_nights',
+      'name'   => 'lodging_nights',
+      'label'  => 'Lodging Nights',
+      'class'  => 'radio-medium',
+      'value'  => [ '20150411', ],
+      'choices' => [
+        '20150410' => 'Fri',
+        '20150411' => 'Sat',
+        '20150412' => 'Sun',
+      ],
+    ]);
+    $lodgingWith = new TextInputView([
+      'id'     => 'lodging_with',
+      'name'   => 'lodging_with',
+      'label'  => 'Lodging With',
+    ]);
+    $travelingWith = new TextInputView([
+      'id'     => 'traveling_with',
+      'name'   => 'traveling_with',
+      'label'  => 'Traveling With',
+    ]);
+    $travelingFrom = new TextInputView([
+      'id'     => 'traveling_from',
+      'name'   => 'traveling_from',
+      'label'  => 'Traveling From',
+    ]);
+
+    $formView = new FormView([
+      'action' => sprintf('/project-person/%d/edit',$projectPerson['id']),
+      'method' => 'POST',
+      'class'  => 'project-person-edit'
+    ]);
+
     return <<<TYPEOTHER
-<form method="post" class="project-person-edit" action="/project/19/person/42/edit">
+<form{$formView->renderAttrs()}>
 <fieldset>
   <legend><span>Level</span></legend>
   <div>{$refereeLevel->render()}</div>
   <div>{$refereeLevelCenter->render()}</div>
   <div>{$refereeLevelAssist->render()}</div>
+  <div>{$assessmentRequest->render()}</div>
 </fieldset>
 <fieldset>
   <legend><span>Lodging and Travel</span></legend>
-  <div><label>Assessment Request</label>
-    <div id="form_basic_requestAssessment" class="radio-medium" >
-      <input type="radio" id="form_basic_requestAssessment_0" name="form[basic][requestAssessment]" value="None" checked="checked" />
-      <label for="form_basic_requestAssessment_0">None</label>
-      <input type="radio" id="form_basic_requestAssessment_1" name="form[basic][requestAssessment]" value="Informal" />
-      <label for="form_basic_requestAssessment_1">Informal</label>
-      <input type="radio" id="form_basic_requestAssessment_2" name="form[basic][requestAssessment]" value="Formal" />
-      <label for="form_basic_requestAssessment_2">Formal</label>
-    </div>
-  </div>
+  <div>{$lodgingNights->render()}</div>
+  <div>{$lodgingWith  ->render()}</div>
+  <div>{$travelingWith->render()}</div>
+  <div>{$travelingFrom->render()}</div>
 </fieldset>
 <div><button type="submit">Register</button></div>
 </form>

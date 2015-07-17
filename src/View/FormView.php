@@ -25,6 +25,12 @@ class FormView extends AbstractView
     ],$props);
     parent::__construct($props);
   }
+  public function renderStart()
+  {
+    return <<<TYPEOTHER
+<form{$this->renderAttrs($this->attrKeys)}>
+TYPEOTHER;
+  }
   public function render()
   {
     $attrsHtml = $this->renderAttrs($this->attrKeys);

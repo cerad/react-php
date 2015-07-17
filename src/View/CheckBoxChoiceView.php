@@ -1,14 +1,14 @@
 <?php
 namespace Cerad\Component\View;
 
-class RadioChoiceView extends AbstractInputView
+class CheckBoxChoiceView extends AbstractInputView
 {
+  protected $tag = 'div';
+
   public function __construct($props = [])
   {
     $this->attrKeys = array_merge($this->attrKeys,[
-      'name','disabled','size',
-      // html5
-      'autofocus','required','form'
+      'name','required','disabled',
     ]);
     $props = array_replace([
       'value'   => null,
@@ -24,7 +24,7 @@ class RadioChoiceView extends AbstractInputView
 
     $html = null;
     $labelView = new LabelView();
-    $inputView = new RadioInputView();
+    $inputView = new CheckBoxInputView();
     foreach($props['choices'] as $key => $value) {
       $checked = false;
       foreach($values as $valueKey) {
@@ -54,5 +54,6 @@ class RadioChoiceView extends AbstractInputView
 {$this->renderChoices()}
 </div>
 TYPEOTHER;
+
   }
 }

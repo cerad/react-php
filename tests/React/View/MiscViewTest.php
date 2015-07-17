@@ -10,8 +10,8 @@ class MiscViewTest extends AbstractTst
   public function testLabelView()
   {
     $view = new LabelView([
-      'for'      => 'element-id',
-      'children' => 'The Label',
+      'for'     => 'element-id',
+      'content' => 'The Label',
     ]);
 
     $expect = <<<TYPEOTHER

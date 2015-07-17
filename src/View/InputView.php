@@ -1,7 +1,7 @@
 <?php
 namespace Cerad\Component\View;
 
-class InputView extends AbstractView
+class InputView extends AbstractInputView
 {
   public function __construct($props = [])
   {
@@ -35,35 +35,11 @@ class InputView extends AbstractView
       'type'  => null,
       'name'  => null,
       'value' => null,
+      'label' => null, // Optional, should be possible to specify before or after
     ],$props);
 
     parent::__construct($props);
-
   }
-  protected function renderLabel()
-  {
-    $props = $this->props;
 
-    if (!isset($props['label'])) return null;
 
-    $content = $this->escape($props['label']);
-    $for = isset($props['id']) ? $this->escape($props['id']) : null;
-
-    $label = new LabelView([
-      'for'     => $for,
-      'content' => $content,
-    ]);
-    return $label->render();
-  }
-  public function render()
-  {
-    // Future: If have a label then need an id
-    $attrsHtml = $this->renderAttrs($this->attrKeys);
-
-    return <<<TYPEOTHER
-{$this->renderLabel()}
-<input{$attrsHtml}>
-TYPEOTHER;
-
-  }
 }

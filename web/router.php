@@ -8,7 +8,13 @@ $uri    = $_SERVER["REQUEST_URI"];
 $method = $_SERVER["REQUEST_METHOD"];
 
 if ($uri === '/plan') {
+  $projectPerson = [
+    'id' => 42,
+    'assessment_request' => 'informal',
+  ];
   $form = new ProjectPersonForm();
+
+  $form->setData($projectPerson);
 
   if ($method == 'POST') {
     $form->submit($_POST);

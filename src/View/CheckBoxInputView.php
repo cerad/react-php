@@ -1,7 +1,7 @@
 <?php
 namespace Cerad\Component\View;
 
-class RadioInputView extends AbstractInputView
+class CheckBoxInputView extends AbstractInputView
 {
   public function __construct($props = [])
   {
@@ -10,10 +10,10 @@ class RadioInputView extends AbstractInputView
       'type','name','checked','value',
       'readonly','required','disabled',
       //'maxlength','size',
-      //'autocomplete','autofocus','form',
+      //'autocomplete','autofocus','form','pattern','placeholder',
     ]);
     $props = array_replace([
-      'type'  => 'radio',
+      'type'  => 'checkbox',
       'name'  => null,
       'value' => null,
     ],$props);

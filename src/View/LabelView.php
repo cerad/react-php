@@ -3,8 +3,6 @@ namespace Cerad\Component\View;
 
 class LabelView extends AbstractView
 {
-  protected $tag = 'label';
-
   public function __construct($props = [])
   {
     // http://www.w3schools.com/tags/tag_label.asp
@@ -12,11 +10,16 @@ class LabelView extends AbstractView
       'for', 'form',
     ]);
     $props = array_replace([
+      'content' => null,
     ],$props);
     parent::__construct($props);
   }
   public function render()
   {
+    $content = $this->escape($this->props['content']);
+
+    return sprintf('<label%s>%s</label>',$this->renderAttrs(),$content);
+
     return <<<TYPEOTHER
 <{$this->tag}{$this->renderAttrs($this->attrKeys)}>
 {$this->renderChildren()}
